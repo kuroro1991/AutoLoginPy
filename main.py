@@ -11,7 +11,7 @@ import pandas as pd
 from selenium import webdriver
 import time
 
-#ウィンドウサイズを指定
+# ウィンドウサイズを指定
 Config.set('graphics', 'width', '240')
 Config.set('graphics', 'height', '340')
 
@@ -20,7 +20,7 @@ resource_add_path('./fonts')
 #日本語が使用できるように日本語フォントを指定する
 LabelBase.register(DEFAULT_FONT, 'mplus-2c-regular.ttf')
 global df
-#csvファイル読み込み
+# csvファイル読み込み
 df = pd.read_csv('setting.csv', sep=',', quotechar='"', comment="#", encoding='cp932')
 
 
@@ -29,8 +29,8 @@ class Menu(BoxLayout):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        #ファイル内容出力
-        #print(df)
+        # ファイル内容出力
+        # print(df)
         for i in range(len(df)):
             #ボタンを作成(ID、テキスト、比率を設定)
             button = Button(id=str(i), text=df['NAME'][i], \
@@ -39,9 +39,9 @@ class Menu(BoxLayout):
             self.menu_buttons.add_widget(button)
             
     def select_button(self, button):
-        #ボタン押下時の処理
+        # ボタン押下時の処理
         message = button.text + " を選択しました"
-        #ラベルのテキストを更新
+        # ラベルのテキストを更新
         self.ids['menu_label'].text = message
 
         print('Selected is {0} button'.format(button.id))
@@ -51,8 +51,8 @@ class Menu(BoxLayout):
                 str(df['PW'][index])+'、'+str(df['PW_TYPE'][index])+'、'+ \
                 str(df['SUBMIT'][index])+'\n')
 
-        #ログイン処理
-        #Chromeを起動
+        # ログイン処理
+        # Chromeを起動
         driver = webdriver.Chrome('C:\drivers\chromedriver.exe')
         time.sleep(1)
         driver.refresh()
